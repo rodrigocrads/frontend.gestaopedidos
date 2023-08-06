@@ -20,7 +20,7 @@ import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.compon
     HttpClientModule,
     RouterModule,
     PageHeaderComponent,
-    BreadCrumbComponent,
+    BreadCrumbComponent
   ]
 })
 export class SharedModule {}
