@@ -59,7 +59,7 @@ export class OrderFormComponent extends BaseResourceFormComponent<Order> impleme
   }
 
   protected override creationPageTitle(): string {
-    return 'Cadastro de novo pedido';
+    return 'Criar novo pedido';
   }
 
   protected override editionPageTitle(): string {
