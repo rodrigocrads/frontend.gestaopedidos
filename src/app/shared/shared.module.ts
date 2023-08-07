@@ -4,23 +4,29 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormFieldErrorComponent } from './components/form-field-error/form-field-error.component';
 
 @NgModule({
   declarations: [
     PageHeaderComponent,
-    BreadCrumbComponent
+    BreadCrumbComponent,
+    FormFieldErrorComponent,
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     RouterModule,
+    ReactiveFormsModule,
   ],
   exports: [
     CommonModule,
     HttpClientModule,
     RouterModule,
+    ReactiveFormsModule,
     PageHeaderComponent,
-    BreadCrumbComponent
+    BreadCrumbComponent,
+    FormFieldErrorComponent,
   ]
 })
 export class SharedModule {}
