@@ -4,7 +4,7 @@
 
 <app-page-header
     [page-title]="pageTitle"
-    btn-class="btn-primary"
+    btn-class="btn-dark"
     btn-text="<< Voltar"
     btn-link="/orders"
 />
@@ -60,11 +60,13 @@
                     <app-form-field-error [form-control]="form['details']"></app-form-field-error>
                 </div>
             </div>
+            <button
+                [disabled]="submittingForm || resourceForm.invalid"
+                type="submit"
+                class="btn btn-primary btn-lg float-right mt-4"
+            >
+                Salvar
+            </button>
         </div>
     </div>
-    <button
-        [disabled]="submittingForm || resourceForm.invalid"
-        type="submit"
-        class="btn btn-primary btn-lg float-right mt-3"
-    >Salvar</button>
 </form>
