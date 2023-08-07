@@ -60,7 +60,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
    if (this.currentAction === 'edit') {
     this.route.paramMap.pipe(
       switchMap(params => {
-        return this.resourceService.getById(Number.parseInt(params.get('id') || ''))
+        return this.resourceService.getById(params.get('id') || '')
       })
     )
     .subscribe({

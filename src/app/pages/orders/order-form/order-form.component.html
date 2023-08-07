@@ -1,9 +1,9 @@
 <app-bread-crumb
-    [items]="[{text: 'Pedidos', link: '/orders'}, {text: 'Novo Pedido'}]"
+    [items]="[{text: 'Pedidos', link: '/orders'}, {text: pageTitle}]"
 />
 
 <app-page-header
-    page-title="Novo Pedido"
+    [page-title]="pageTitle"
     btn-class="btn-primary"
     btn-text="<< Voltar"
     btn-link="/orders"

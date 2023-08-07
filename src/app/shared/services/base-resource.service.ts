@@ -18,7 +18,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
         this.http = injector.get(HttpClient);
     }
 
-    getById(id: number): Observable<T> {
+    getById(id: string): Observable<T> {
         const url = `${this.basePath}${this.apiPath}/${id}`;
         return this.http.get(url).pipe(
             map((jsonData: any) => this.jsonDataToResource(jsonData)),
@@ -42,7 +42,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     }
 
     update(resource: T): Observable<T> {
-        const url = `${this.basePath}${this.apiPath}}/${resource.id}`;
+        const url = `${this.basePath}${this.apiPath}/${resource.id}`;
         return this.http.put(url, resource).pipe(
             catchError(this.handleError),
             // caso esteja realizando uma chamada há um servidor real deve se devolver a resource que vier do servidor
@@ -50,7 +50,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
         );
     }
 
-    delete(id: number): Observable<any> {
+    delete(id: string): Observable<any> {
         const url = `${this.basePath}${this.apiPath}/${id}`;
         return this.http.delete(url).pipe(
             catchError(this.handleError),

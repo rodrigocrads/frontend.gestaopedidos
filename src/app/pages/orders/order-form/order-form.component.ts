@@ -3,7 +3,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { BaseResourceFormComponent } from 'src/app/shared/components/base-resource-form/base-resource-form.component';
 import { Order } from '../shared/order.model';
 import { OrderService } from '../shared/order.service';
-import { Validators } from '@angular/forms';
+import { MinLengthValidator, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-order-form',
@@ -50,8 +50,9 @@ export class OrderFormComponent extends BaseResourceFormComponent<Order> impleme
 
   protected override buildResourceForm(): void {
     this.resourceForm = this.formBuilder.group({
-      details: ['', [Validators.required]],
-      client: ['', [Validators.required]],
+      id: [null],
+      details: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      client: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]],
       deliveryDate: ['', [Validators.required]],
       total: ['', [Validators.required]],
     });
