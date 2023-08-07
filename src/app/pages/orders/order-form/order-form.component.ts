@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
-import { BaseResourceFormComponent } from 'src/app/shared/components/base-resource-form/base-resource-form.component';
+import { BaseFormComponent } from 'src/app/shared/components/base-form/base-form.component';
 import { Order } from '../shared/order.model';
 import { OrderService } from '../shared/order.service';
 import { MinLengthValidator, Validators } from '@angular/forms';
@@ -10,7 +10,7 @@ import { MinLengthValidator, Validators } from '@angular/forms';
   templateUrl: './order-form.component.html',
   styleUrls: ['./order-form.component.scss']
 })
-export class OrderFormComponent extends BaseResourceFormComponent<Order> implements OnInit {
+export class OrderFormComponent extends BaseFormComponent<Order> implements OnInit {
   typeOptions: Array<{label: string, value: string}> = [];
 
   constructor(

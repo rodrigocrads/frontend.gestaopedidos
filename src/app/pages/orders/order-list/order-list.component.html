@@ -8,3 +8,39 @@
     btn-text="+ Novo Pedido"
     btn-link="/orders/new"
 />
+
+<div class="card">
+    <div class="card-body table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Valor total</th>
+                    <th>Data da entrega</th>
+                    <th>Detalhes</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of resources">
+                    <td>
+                        {{ order.client }}
+                    </td>
+                    <td>
+                        {{ order.total }}
+                    </td>
+                    <td>
+                        {{ order.deliveryDate }}
+                    </td>
+                    <td>
+                        {{ order.details }}
+                    </td>
+                    <td>
+                        <a [routerLink]="[order.id, 'edit']" class="btn btn-outline-info btn-sm mr-2">Editar</a>
+                        <button (click)="delete(order)" class="btn btn-outline-info btn-sm">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

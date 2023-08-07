@@ -3,12 +3,12 @@ import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { BaseResourceModel } from '../../models/base-resource.model';
-import { BaseResourceService } from '../../services/base-resource.service';
+import { BaseResourceService } from '../../services/base.service';
 
 import { switchMap } from 'rxjs/operators';
 
 @Injectable()
-export abstract class BaseResourceFormComponent<T extends BaseResourceModel> implements OnInit, AfterContentChecked {
+export abstract class BaseFormComponent<T extends BaseResourceModel> implements OnInit, AfterContentChecked {
 
   currentAction: string = '';
   resourceForm: FormGroup = {} as FormGroup;
