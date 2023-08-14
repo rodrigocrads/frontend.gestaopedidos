@@ -1,7 +1,7 @@
 import { OnInit, Injectable } from '@angular/core';
 
 import { BaseResourceModel } from '../../models/base-resource.model';
-import { BaseResourceService } from '../../services/base.service';
+import { BaseResourceService, QueryParam } from '../../services/base.service';
 
 @Injectable()
 export class BaseListComponent<T extends BaseResourceModel> implements OnInit {
@@ -11,10 +11,22 @@ export class BaseListComponent<T extends BaseResourceModel> implements OnInit {
     constructor(private resourceService: BaseResourceService<T>) { }
 
     ngOnInit(): void {
-        this.resourceService.getAll()
+        this.listAll();
+    }
+
+    listAll() {
+        this.resourceService.listAll()
             .subscribe({
                 next: resources => this.resources = resources,
                 error: () => alert('Erro ao tentar carregar a lista')
+            });
+    }
+
+    listByFilter(filters: QueryParam[] = []) {
+        this.resourceService.listByFilters(filters)
+            .subscribe({
+                next: resources => this.resources = resources,
+                error: () => alert('Erro ao tentar carregar a lista com filtros')
             });
     }
 

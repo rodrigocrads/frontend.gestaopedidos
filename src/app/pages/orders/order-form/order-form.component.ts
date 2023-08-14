@@ -55,6 +55,7 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
       client: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]],
       deliveryDate: ['', [Validators.required]],
       total: ['', [Validators.required]],
+      status: ['AGUARDANDO_CONFIRMACAO'],
     });
   }
 

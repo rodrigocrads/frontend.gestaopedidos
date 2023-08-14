@@ -6,7 +6,13 @@ import { Injector } from "@angular/core";
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
+export interface QueryParam {
+    key: string,
+    value: string
+}
+
 export abstract class BaseResourceService<T extends BaseResourceModel> {
+
     private http: HttpClient;
     private basePath = 'http://localhost:3000/';
 
@@ -19,15 +25,22 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     }
 
     getById(id: string): Observable<T> {
-        const url = `${this.basePath}${this.apiPath}/${id}`;
+        const url = `${this.getBaseUrl()}/${id}`;
         return this.http.get(url).pipe(
             map((jsonData: any) => this.jsonDataToResource(jsonData)),
             catchError(this.handleError),
         )
     }
 
-    getAll(): Observable<T[]> {
-        return this.http.get<any[]>(`${this.basePath}${this.apiPath}`).pipe(
+    listAll(): Observable<T[]> {
+        return this.http.get<any[]>(`${this.getBaseUrl()}`).pipe(
+            map((jsonData: any[]) => this.jsonDataToResources(jsonData)),
+            catchError(this.handleError),
+        );
+    }
+
+    listByFilters(filters: QueryParam[] = []): Observable<T[]> {
+        return this.http.get<any[]>(this.getBaseUrl(filters)).pipe(
             map((jsonData: any[]) => this.jsonDataToResources(jsonData)),
             catchError(this.handleError),
         );
@@ -35,14 +48,14 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 
     create(resource: T): Observable<T> {
         resource.id = this.generate_UUID();
-        return this.http.post(`${this.basePath}${this.apiPath}`, resource).pipe(
+        return this.http.post(`${this.getBaseUrl()}`, resource).pipe(
             map((jsonData: any) => this.jsonDataToResource(jsonData)),
             catchError(this.handleError),
         );
     }
 
     update(resource: T): Observable<T> {
-        const url = `${this.basePath}${this.apiPath}/${resource.id}`;
+        const url = `${this.getBaseUrl()}/${resource.id}`;
         return this.http.put(url, resource).pipe(
             catchError(this.handleError),
             // caso esteja realizando uma chamada há um servidor real deve se devolver a resource que vier do servidor
@@ -51,7 +64,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     }
 
     delete(id: string): Observable<any> {
-        const url = `${this.basePath}${this.apiPath}/${id}`;
+        const url = `${this.getBaseUrl()}/${id}`;
         return this.http.delete(url).pipe(
             catchError(this.handleError),
             map(() => null)
@@ -69,6 +82,22 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     protected handleError(error: any): Observable<any> {
         console.log('ERRO NA REQUISIÇÃO');
         return throwError(() => error);
+    }
+
+    private getBaseUrl(filters: QueryParam[] = []): string {
+        let url = `${this.basePath}${this.apiPath}`;
+
+        if (filters.length > 0) {
+            filters.forEach((item, index) => {
+                if (index === 0) {
+                    url += `?${item.key}=${item.value}`;
+                    return;
+                }
+                url += `&${item.key}=${item.value}`;
+            });
+        }
+
+        return url;
     }
 
     private generate_UUID(){
