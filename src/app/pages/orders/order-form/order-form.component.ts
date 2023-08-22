@@ -12,6 +12,7 @@ import { MinLengthValidator, Validators } from '@angular/forms';
 })
 export class OrderFormComponent extends BaseFormComponent<Order> implements OnInit {
   typeOptions: Array<{label: string, value: string}> = [];
+  statusOptions = Order.getStatusOptions();
 
   constructor(
     private primeNgConfig: PrimeNGConfig,

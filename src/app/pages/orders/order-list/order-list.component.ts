@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Order } from '../shared/order.model';
 import { OrderService } from '../shared/order.service';
 import { BaseListComponent } from 'src/app/shared/components/base-list/base-list.component';
+import { OrderStatus } from '../shared/order-status.enum';
 
 @Component({
   selector: 'app-order-list',
@@ -11,24 +12,38 @@ import { BaseListComponent } from 'src/app/shared/components/base-list/base-list
 export class OrderListComponent extends BaseListComponent<Order> {
 
   badgeType = '';
+  statusOptions = Order.getStatusOptions();
 
   constructor(protected orderService: OrderService) {
     super(orderService);
   }
 
   public getStatusDescription(status: string|undefined): string {
-    switch (status) {
-      case 'AGUARDANDO_CONFIRMACAO':
-        return 'Aguardando Confirmação';
-      default:
-        return '';
+    if (!status) {
+      return '';
     }
+    
+    const foundOptions = this.statusOptions.filter(option => option.value === status);
+
+    if (foundOptions.length === 0) {
+      return '';
+    }
+
+    return foundOptions[0].label;
   }
 
   public getBadgeTypeClass(status: string|undefined): string {
     switch (status) {
-      case 'AGUARDANDO_CONFIRMACAO':
+      case OrderStatus.AGUARDANDO_CONFIRMACAO:
         return 'badge-warning';
+      case OrderStatus.CONFIRMADO:
+        return 'badge-primary';
+      case OrderStatus.PENDENTE:
+        return 'badge-danger';
+      case OrderStatus.CANCELADO:
+        return 'badge-light';
+      case OrderStatus.CONCLUIDO:
+        return 'badge-success';
       default:
         return 'badge-primary';
     }

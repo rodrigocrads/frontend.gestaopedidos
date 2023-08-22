@@ -16,12 +16,14 @@
         </div>
         <div class="card-body">
             <div class="form-row">
+                <!-- Nome do cliente -->
                 <div class="form-group col-md-4">
                     <label for="client">Nome do cliente</label>
                     <input class="form-control" id="client" formControlName="client" />
                     <app-form-field-error [form-control]="form['client']"></app-form-field-error>
                 </div>
 
+                <!-- Valor total -->
                 <div class="form-group col-md-3">
                     <label for="total">Valor total</label>
                     <div class="input-group">
@@ -33,6 +35,16 @@
                     <app-form-field-error [form-control]="form['total']"></app-form-field-error>
                 </div>
 
+                <!-- Status do Pedido -->
+                <div class="form-group col-md-3">
+                    <label for="status">Status pedido</label><br>
+                    <select name="status" id="status" formControlName="status" class="form-control">
+                        <option *ngFor="let status of statusOptions" [value]="status.value">{{ status.label }}</option>
+                    </select>
+                    <app-form-field-error [form-control]="form['status']"></app-form-field-error>
+                </div>
+
+                <!-- Data da entrega -->
                 <div class="form-group col-md-2">
                     <label for="deliveryDate">Data da entrega</label><br>
                     <p-calendar
@@ -47,7 +59,9 @@
                     <app-form-field-error [form-control]="form['deliveryDate']"></app-form-field-error>
                 </div>
             </div>
+
             <div class="form-row">
+                <!-- Detalhes do pedido -->
                 <div class="form-group col-md-4">
                     <label for="details">Detalhes do pedido</label>
                     <textarea

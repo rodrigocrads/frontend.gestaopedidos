@@ -20,11 +20,7 @@
                     <label for="status">Status do pedido</label>
                     <select #filterStatus class="form-control" name="status" (change)="filterOrders($event)">
                         <option value="">Todos</option>
-                        <option value="AGUARDANDO_CONFIRMACAO">Aguardando Confirmação</option>
-                        <option value="EM_ANDAMENTO">Em Andamento</option>
-                        <option value="PENDENTE">Pendente</option>
-                        <option value="CONCLUIDO">Concluído</option>
-                        <option value="CANCELADO">Cancelado</option>
+                        <option *ngFor="let option of statusOptions" [value]="option.value">{{ option.label }}</option>
                     </select>
                 </div>
             </div>
@@ -34,7 +30,11 @@
 
 <div class="card">
     <div class="card-body table-responsive">
-        <table class="table table-hover">
+        <div style="text-align: center;" *ngIf="resources.length === 0">
+            <b>Nenhum pedido encontrado.</b>
+        </div>
+
+        <table *ngIf="resources.length > 0" class="table table-hover">
             <thead>
                 <tr>
                     <th>Pedido</th>
