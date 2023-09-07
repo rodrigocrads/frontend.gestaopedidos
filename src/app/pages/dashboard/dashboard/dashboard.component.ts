@@ -33,7 +33,11 @@ export class DashboardComponent implements OnInit {
   }
 
   public calculateInvoincing(): number {
-    const orders = this.getOrdersByStatus(OrderStatus.CONCLUIDO)
+    const currentDate = new Date();
+    const orders = this.filterOrdersByDateAndCompleted(
+      currentDate.getMonth(),
+      currentDate.getFullYear()
+    );
     return this.sumOrdersTotal(orders);
   }
 
@@ -54,7 +58,12 @@ export class DashboardComponent implements OnInit {
   }
 
   public completedLength(): number {
-    return this.getOrdersByStatus(OrderStatus.CONCLUIDO).length;
+    const currentDate = new Date();
+    const orders = this.filterOrdersByDateAndCompleted(
+      currentDate.getMonth(),
+      currentDate.getFullYear()
+    );
+    return orders.length;
   }
 
   private getOrdersByStatus(status: OrderStatus): Order[] {
@@ -62,8 +71,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private loadChart() {
-    const labels = this.getChartLabels();    
-
+    this.loadChartData();
     new Chart("myChart", {
       type: 'bar',
       data: {
@@ -90,7 +98,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  private getChartLabels() {
+  private loadChartData() {
     const monthsNames = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
     let monthIndex = new Date().getMonth() -1;
     let year = new Date().getFullYear();
@@ -112,11 +120,14 @@ export class DashboardComponent implements OnInit {
     }
     
     this.chartData = this.chartData.reverse();
-    console.log(this.chartData);
   }
 
   private filterOrdersByDateAndCompleted(month: number, year: number) {
     return this.orders.filter(order => {
+      if (order.status !== OrderStatus.CONCLUIDO) {
+        return false;
+      }
+
       const orderDate = moment(order.deliveryDate, 'DD/MM/YYYY');
 
       const monthMatches = orderDate.month() == month;
