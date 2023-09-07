@@ -16,7 +16,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3>150</h3>
+                        <h3>{{ waitingConfirmationLength() }}</h3>
                         <p>Aguardando Confirmação</p>
                     </div>
                     <div class="icon">
@@ -28,7 +28,7 @@
             <div class="col-lg-3 col-xs-6">
                 <div class="small-box bg-blue">
                     <div class="inner">
-                        <h3>53</h3>
+                        <h3>{{ confirmedLength() }}</h3>
                         <p>Confirmados</p>
                     </div>
                     <div class="icon">
@@ -40,7 +40,7 @@
             <div class="col-lg-3 col-xs-6">
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3>{{ pendingLength() }}</h3>
                         <p>Pendentes</p>
                     </div>
                     <div class="icon">
@@ -52,7 +52,7 @@
             <div class="col-lg-3 col-xs-6">
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3>25</h3>
+                        <h3>{{ completedLength() }}</h3>
                         <p>Concluídos (Mês atual)</p>
                     </div>
                     <div class="icon">
@@ -72,7 +72,7 @@
             </span>
             <div class="info-box-content">
                 <span class="info-box-text">Meta do mês</span>
-                <span class="info-box-number">R$ 1500,00</span>
+                <span class="info-box-number">{{ goalOfMonth.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) }}</span>
             </div>
         </div>
     </div>
@@ -85,10 +85,10 @@
             <div class="info-box-content">
                 <span class="info-box-text">Faturamento do mês</span>
                 <span class="info-box-number">
-                    R$ 800,00
-                    <span class="text-danger">
-                        <i class="fas fa-caret-down"></i>
-                        18%
+                    {{ calculateInvoincing().toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) }}
+                    <span [class]="calculateGoalDiffPercentage() > 0 ? 'text-success' : 'text-danger'">
+                        <i [class]="calculateGoalDiffPercentage() > 0 ? 'fas fa-caret-up' : 'fas fa-caret-down'"></i>
+                        {{ calculateGoalDiffPercentage() }}%
                     </span>
                 </span>
             </div>
