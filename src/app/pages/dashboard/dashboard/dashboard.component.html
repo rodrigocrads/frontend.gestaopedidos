@@ -84,7 +84,55 @@
             </span>
             <div class="info-box-content">
                 <span class="info-box-text">Faturamento do mês</span>
-                <span class="info-box-number">R$ 800,00</span>
+                <span class="info-box-number">
+                    R$ 800,00
+                    <span class="text-danger">
+                        <i class="fas fa-caret-down"></i>
+                        18%
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header border-0">
+                <div class="d-flex justify-content-between">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-pie mr-1"></i>
+                        Faturamento (Últimos 12 meses)
+                    </h3>
+                    <!-- <a href="javascript:void(0);">View Report</a> -->
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="card-body">
+                <div class="position-relative mb-4">
+                    <div class="chartjs-size-monitor">
+                        <div class="chartjs-size-monitor-expand">
+                            <div class=""></div>
+                        </div>
+                        <div class="chartjs-size-monitor-shrink">
+                            <div class=""></div>
+                        </div>
+                    </div>
+                    <canvas
+                        id="myChart"
+                        height="250"
+                        width="1033"
+                        style="display: block; height: 200px; width: 827px;"
+                        class="chartjs-render-monitor"
+                    >
+                    </canvas>
+                </div>
             </div>
         </div>
     </div>
