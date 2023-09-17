@@ -14,7 +14,9 @@ export class ProductListComponent extends BaseListComponent<Product>{
     {value: 'cb555d82-da5a-4a9c-b8b0-4ee46e6beb21', label: 'Biscoitos Decorados'},
   ];
 
-  constructor(protected productService: ProductService) {
+  constructor(
+    protected productService: ProductService
+  ) {
     super(productService);
   }
 

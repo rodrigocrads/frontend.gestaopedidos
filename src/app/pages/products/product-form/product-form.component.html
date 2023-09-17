@@ -1,0 +1,84 @@
+<app-bread-crumb
+    [items]="[{text: 'Produtos', link: '/products'}, {text: pageTitle}]"
+/>
+
+<app-page-header
+    [page-title]="pageTitle"
+    btn-class="btn-dark"
+    btn-text="<< Voltar"
+    btn-link="/products"
+/>
+
+<form [formGroup]="resourceForm" (submit)="submitForm()">
+    <div class="card">
+        <div class="card-header">
+            Informações sobre o produto
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <!-- Nome do Produto -->
+                <div class="form-group col-md-4">
+                    <label for="name">Nome do Produto</label>
+                    <input class="form-control" id="name" formControlName="name" />
+
+                    <app-form-field-error [form-control]="form['name']"></app-form-field-error>
+                </div>
+
+                <!-- Category Id-->
+                <div class="form-group col-md-3">
+                    <label for="categoryId">Categoria</label>
+                    <select name="categoryId" id="categoryId" formControlName="categoryId" class="form-control">
+                        <option value="">Selecione uma categoria</option>
+                        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+                    </select>
+
+                    <app-form-field-error [form-control]="form['categoryId']"></app-form-field-error>
+                </div>
+
+                <!-- Valor unitário -->
+                <div class="form-group col-md-3">
+                    <label for="value">Valor unitário</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">R$</div>
+                        </div>
+                        <input [imask]="imaskConfig" class="form-control" id="value" formControlName="value" />
+                    </div>
+                    <app-form-field-error [form-control]="form['value']"></app-form-field-error>
+                </div>
+
+                <!-- Status do Pedido -->
+                <div class="form-group col-md-2">
+                    <label for="status">Status</label><br>
+                    <select name="status" id="status" formControlName="status" class="form-control">
+                        <option [value]="'ATIVO'">Ativo</option>
+                        <option [value]="'INATIVO'">Inativo</option>
+                    </select>
+                    <app-form-field-error [form-control]="form['status']"></app-form-field-error>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <!-- Descrição do produto -->
+                <div class="form-group col-md-4">
+                    <label for="description">Descrição do produto</label>
+                    <textarea
+                        class="form-control"
+                        id="description"
+                        formControlName="description"
+                        rows="4"
+                    >
+                    </textarea>
+                    <app-form-field-error [form-control]="form['description']"></app-form-field-error>
+                </div>
+            </div>
+            <button
+                [disabled]="submittingForm || resourceForm.invalid"
+                type="submit"
+                class="btn btn-primary btn-lg float-right mt-4"
+            >
+                Salvar
+            </button>
+        </div>
+    </div>
+</form>
