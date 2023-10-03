@@ -1,0 +1,75 @@
+<app-bread-crumb
+    [items]="[{text: 'Pedidos'}]"
+/>
+
+<app-page-header
+    page-title="Pedidos"
+    btn-class="btn btn-success btn-lg float-right"
+    btn-text="+ Novo Pedido"
+    btn-link="/orders/new"
+/>
+
+<div class="card">
+    <div class="card-header">
+        Filtros de busca
+    </div>
+    <div class="card-body table-responsive">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="status">Status do pedido</label>
+                    <select #filterStatus class="form-control" name="status" (change)="filterOrders($event)">
+                        <option value="">Todos</option>
+                        <option *ngFor="let option of statusOptions" [value]="option.value">{{ option.label }}</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body table-responsive">
+        <div style="text-align: center;" *ngIf="resources.length === 0">
+            <b>Nenhum pedido encontrado.</b>
+        </div>
+
+        <table *ngIf="resources.length > 0" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Pedido</th>
+                    <th>Valor total</th>
+                    <th>Data da entrega</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of resources">
+                    <td>
+                        <b>{{ order.client }}</b>
+                        <br />
+                        <small [title]="order.details">
+                            {{ format(order.details || '') }}
+                        </small>
+                    </td>
+                    <td>
+                       R$ {{ order.total }}
+                    </td>
+                    <td>
+                        {{ order.deliveryDate }}
+                    </td>
+                    <td>
+                        <span class="badge pt-1 pb-1" [ngClass]="getBadgeTypeClass(order.status)">
+                            {{ getStatusDescription(order.status) }}
+                        </span>
+                    </td>
+                    <td>
+                        <a [routerLink]="[order.id, 'edit']" class="btn btn-outline-info btn-sm mr-2">Editar</a>
+                        <button (click)="delete(order)" class="btn btn-outline-info btn-sm">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
