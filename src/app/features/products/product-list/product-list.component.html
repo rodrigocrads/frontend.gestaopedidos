@@ -1,0 +1,75 @@
+<app-bread-crumb
+    [items]="[{text: 'Produtos'}]"
+/>
+
+<app-page-header
+    page-title="Produtos"
+    btn-class="btn btn-success btn-lg float-right"
+    btn-text="+ Novo Produto"
+    btn-link="/products/new"
+/>
+
+<div class="card">
+    <div class="card-header">
+        Filtros de busca
+    </div>
+    <div class="card-body table-responsive">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="status">Categoria</label>
+                    <select #filterCategory class="form-control" name="status" (change)="filterByCategory($event)">
+                        <option value="">Todos</option>
+                        <option *ngFor="let option of categoriesOptions" [value]="option.value">{{ option.label }}</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body table-responsive">
+
+        <div style="text-align: center;" *ngIf="resources.length === 0">
+            <b>Nenhum pedido encontrado.</b>
+        </div>
+
+        <table *ngIf="resources.length > 0" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Valor Unitário</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of resources">
+                    <td>
+                        <b>{{ product.name }}</b>
+                        <br />
+                        <small [title]="product.description">
+                            {{ product.description }}
+                        </small>
+                    </td>
+                    <td>
+                        {{ product.category?.name }}
+                    </td>
+                    <td>
+                        R$ {{ product.value }}
+                    </td>
+                    <td>
+                        {{ product.status === 'ATIVO' ? 'ATIVO' : 'INATIVO' }}
+                    </td>
+                    <td>
+                        <a [routerLink]="[product.id, 'edit']" class="btn btn-outline-info btn-sm mr-2">Editar</a>
+                        <button (click)="delete(product)" class="btn btn-outline-info btn-sm">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
