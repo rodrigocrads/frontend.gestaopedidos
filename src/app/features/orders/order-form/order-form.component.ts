@@ -96,13 +96,13 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
   }
 
   public total(): number|undefined {
-    if (!this.isActiveTotalCalculate()) return;
+    if (!this.isActiveTotalCalculate()) return 0;
 
     return this.resourceForm
       .value
       .items
       .reduce((acc: number, curr: any) => {
-        if (!curr.product?.value) return acc;
+        if (!curr?.product?.value) return acc;
         return acc + curr.product?.value?.replace(",", ".") * curr.quantity;
       }, 0);
   }
