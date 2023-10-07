@@ -17,7 +17,7 @@
         <div class="card-body">
             <div class="form-row">
                 <!-- Nome do cliente -->
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="client">Nome do cliente</label>
                     <input class="form-control" id="client" formControlName="client" />
                     <app-form-field-error [form-control]="form['client']"></app-form-field-error>
@@ -26,40 +26,50 @@
 
             <fieldset class="mb-5 mt-3">
                 <legend>Itens do pedido:</legend>
+                <div class="custom-control custom-switch mb-3">
+                    <input #activeCalculateTotalValue type="checkbox" class="custom-control-input" id="active-calculate-total-value" (click)="togglActiveCalculateTotalValue()" value="off">
+                    <label class="custom-control-label" for="active-calculate-total-value">Calcular valor total automaticamente?</label>
+                </div>
                 <div formArrayName="items" class="row">
-                    <div *ngFor="let itemForm of items.controls;let i=index;" class="col-8">
+                    <div *ngFor="let itemForm of items.controls;let i=index;" class="col-9">
                         <div [formGroupName]="i" class="row">
                             <!-- Produto -->
                             <div class="form-group col-md-6">
-                                <label for="product">Produto</label><br>
                                 <p-autoComplete
                                     [style]="{'width':'100%'}"
                                     [inputStyle]="{'width':'100%','font-size': '16px'}"
                                     [suggestions]="filteredProducts"
                                     (completeMethod)="filterProduct($event)"
                                     formControlName="product"
+                                    placeholder="Digite o nome do produto ..."
                                     field="name">
                                 </p-autoComplete>
                             </div>
+
                             <!-- Quantidade -->
                             <div class="form-group col-md-1">
-                                <label for="quantity">Quantidade</label>
                                 <div class="input-group">
                                     <input type="number" min="1" class="form-control" id="quantity" formControlName="quantity" />
                                 </div>
                             </div>
-                            <div class="col-md-1">
-                                <a (click)="deleteItem(i);" class="align-self-end btn btn-danger btn-lg mt-4"><i class="fa fa-trash"></i></a>
+
+                            <div class="col-md-1 subtotal">
+                                {{ subtotal(i).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}
                             </div>
-                            <div class="col-md-2">
-                                Subtotal: R$ {{ subtotal(i) }}
+
+                            <div class="col-md-1">
+                                <a (click)="deleteItem(i);" class="align-self-end btn btn-danger"><i class="fa fa-trash"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4 text-center">
-                        <a (click)="addNewItem();" class="align-self-end btn btn-success btn-block btn-lg">+ Adicionar Item</a>
+                    <div class="col-9">
+                        <div class="row">
+                            <div class="col-6 text-center">
+                                <a (click)="addNewItem();" class="align-self-end btn btn-success btn-block btn-lg">+ Adicionar Item</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </fieldset>
@@ -94,7 +104,7 @@
                 </div>
 
                 <!-- Status do Pedido -->
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <label for="status">Status pedido</label><br>
                     <select name="status" id="status" formControlName="status" class="form-control">
                         <option *ngFor="let status of statusOptions" [value]="status.value">{{ status.label }}</option>
@@ -104,7 +114,7 @@
             </div>
             <div class="form-row">
                 <!-- Detalhes do pedido -->
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-6">
                     <label for="details">Detalhes do pedido</label>
                     <textarea
                         class="form-control"
