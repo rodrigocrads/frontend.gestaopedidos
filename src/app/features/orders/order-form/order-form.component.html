@@ -22,65 +22,113 @@
                     <input class="form-control" id="client" formControlName="client" />
                     <app-form-field-error [form-control]="form['client']"></app-form-field-error>
                 </div>
+            </div>
 
-                <!-- Valor total -->
-                <div class="form-group col-md-3">
-                    <label for="total">Valor total</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">R$</div>
+            <fieldset class="mb-5 mt-3">
+                <legend>Itens do pedido:</legend>
+                <div formArrayName="items" class="row">
+                    <div *ngFor="let itemForm of items.controls;let i=index;" class="col-8">
+                        <div [formGroupName]="i" class="row">
+                            <!-- Produto -->
+                            <div class="form-group col-md-6">
+                                <label for="product">Produto</label><br>
+                                <p-autoComplete
+                                    [style]="{'width':'100%'}"
+                                    [inputStyle]="{'width':'100%','font-size': '16px'}"
+                                    [suggestions]="filteredProducts"
+                                    (completeMethod)="filterProduct($event)"
+                                    formControlName="product"
+                                    field="name">
+                                </p-autoComplete>
+                            </div>
+                            <!-- Quantidade -->
+                            <div class="form-group col-md-1">
+                                <label for="quantity">Quantidade</label>
+                                <div class="input-group">
+                                    <input type="number" min="1" class="form-control" id="quantity" formControlName="quantity" />
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <a (click)="deleteItem(i);" class="align-self-end btn btn-danger btn-lg mt-4"><i class="fa fa-trash"></i></a>
+                            </div>
                         </div>
-                        <input [imask]="imaskConfig" class="form-control" id="total" formControlName="total" />
                     </div>
-                    <app-form-field-error [form-control]="form['total']"></app-form-field-error>
                 </div>
-
-                <!-- Status do Pedido -->
-                <div class="form-group col-md-3">
-                    <label for="status">Status pedido</label><br>
-                    <select name="status" id="status" formControlName="status" class="form-control">
-                        <option *ngFor="let status of statusOptions" [value]="status.value">{{ status.label }}</option>
-                    </select>
-                    <app-form-field-error [form-control]="form['status']"></app-form-field-error>
+                <div class="row">
+                    <div class="col-4 text-center">
+                        <a (click)="addItem();" class="align-self-end btn btn-success btn-block btn-lg">+ Adicionar Item</a>
+                    </div>
                 </div>
+            </fieldset>
 
-                <!-- Data da entrega -->
-                <div class="form-group col-md-2">
-                    <label for="deliveryDate">Data da entrega</label><br>
-                    <p-calendar
-                        id="deliveryDate"
-                        inputStyleClass="form-control"
-                        dataType="string"
-                        dateFormat="dd/mm/yy"
-                        [showButtonBar]="true"
-                        formControlName="deliveryDate"
+            <fieldset>
+                <legend>Dados do pedido:</legend>
+                <div class="form-row">
+                    <!-- Valor total -->
+                    <div class="form-group col-md-2">
+                        <label for="total">Valor total</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">R$</div>
+                            </div>
+                            <input [imask]="imaskConfig" class="form-control" id="total" formControlName="total" />
+                        </div>
+                        <app-form-field-error [form-control]="form['total']"></app-form-field-error>
+                    </div>
+    
+                    <!-- Data da entrega -->
+                    <div class="form-group col-md-2">
+                        <label for="deliveryDate">Data da entrega</label><br>
+                        <p-calendar
+                            [style]="{'width':'100%'}"
+                            id="deliveryDate"
+                            inputStyleClass="form-control"
+                            dataType="string"
+                            dateFormat="dd/mm/yy"
+                            [showButtonBar]="true"
+                            formControlName="deliveryDate"
+                        >
+                        </p-calendar>
+                        <app-form-field-error [form-control]="form['deliveryDate']"></app-form-field-error>
+                    </div>
+    
+                    <!-- Status do Pedido -->
+                    <div class="form-group col-md-3">
+                        <label for="status">Status pedido</label><br>
+                        <select name="status" id="status" formControlName="status" class="form-control">
+                            <option *ngFor="let status of statusOptions" [value]="status.value">{{ status.label }}</option>
+                        </select>
+                        <app-form-field-error [form-control]="form['status']"></app-form-field-error>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <!-- Detalhes do pedido -->
+                    <div class="form-group col-md-5">
+                        <label for="details">Detalhes do pedido</label>
+                        <textarea
+                            class="form-control"
+                            id="details"
+                            formControlName="details"
+                            rows="6"
+                        >
+                        </textarea>
+                        <app-form-field-error [form-control]="form['details']"></app-form-field-error>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="row">
+                <div class="col-12">
+                    <button
+                        [disabled]="submittingForm || resourceForm.invalid"
+                        type="submit"
+                        class="btn btn-primary btn-lg float-right mt-4"
                     >
-                    </p-calendar>
-                    <app-form-field-error [form-control]="form['deliveryDate']"></app-form-field-error>
+                        Salvar dados
+                    </button>
                 </div>
             </div>
-
-            <div class="form-row">
-                <!-- Detalhes do pedido -->
-                <div class="form-group col-md-4">
-                    <label for="details">Detalhes do pedido</label>
-                    <textarea
-                        class="form-control"
-                        id="details"
-                        formControlName="details"
-                        rows="6"
-                    >
-                    </textarea>
-                    <app-form-field-error [form-control]="form['details']"></app-form-field-error>
-                </div>
-            </div>
-            <button
-                [disabled]="submittingForm || resourceForm.invalid"
-                type="submit"
-                class="btn btn-primary btn-lg float-right mt-4"
-            >
-                Salvar
-            </button>
+            
         </div>
     </div>
 </form>

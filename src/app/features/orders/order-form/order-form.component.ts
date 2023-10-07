@@ -3,7 +3,10 @@ import { PrimeNGConfig } from 'primeng/api';
 import { BaseFormComponent } from 'src/app/shared/components/base-form/base-form.component';
 import { Order } from '../shared/order.model';
 import { OrderService } from '../shared/order.service';
-import { MinLengthValidator, Validators } from '@angular/forms';
+import { FormArray, Validators } from '@angular/forms';
+import { Product } from '../../products/shared/product.model';
+import { ProductService } from '../../products/shared/product.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-order-form',
@@ -14,9 +17,13 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
   typeOptions: Array<{label: string, value: string}> = [];
   statusOptions = Order.getStatusOptions();
 
+  filteredProducts: Product[] = [];
+  selectedProduct: Product = {};
+
   constructor(
     private primeNgConfig: PrimeNGConfig,
     protected orderService: OrderService,
+    protected productService: ProductService,
     protected override injector: Injector
   ) {
     super(injector, new Order(), orderService, Order.fromJson);
@@ -57,8 +64,54 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
       deliveryDate: ['', [Validators.required]],
       total: ['', [Validators.required]],
       status: ['AGUARDANDO_CONFIRMACAO'],
+      items: this.formBuilder.array([
+        this.formBuilder.group({ product: ['', [Validators.required]], quantity: 1}),
+      ])
     });
   }
+
+  get items() : FormArray {
+    return this.form["items"] as FormArray;
+  }
+
+  public addItem() {
+    const itemForm = this.formBuilder.group({ product: '', quantity: 1 });
+    this.items.push(itemForm);
+  }
+
+  public deleteItem(itemIndex: number) {
+    this.items.removeAt(itemIndex);
+  }
+
+  public filterProduct(event: any) {
+    this.productService
+      .listByFilters([{key: 'name_like', value: event.query}])
+      .subscribe({
+        next: resources => this.filteredProducts = resources,
+        error: () => alert('Erro ao tentar carregar a lista de produtos com filtros')
+    });
+  }
+
+  override loadResource() {
+    if (this.currentAction === 'edit') {
+     this.route.paramMap.pipe(
+       switchMap(params => {
+         return this.resourceService.getById(params.get('id') || '')
+       })
+     )
+     .subscribe({
+       next: (resource: any) => {
+         this.resource = resource;
+         this.deleteItem(0);
+         this.resource.items?.forEach(() => this.addItem())
+         this.resourceForm.patchValue(resource); // binds loaded resource data to ResourceForm 
+       },
+       error: error => {
+         alert('Ocorreu um erro no servidor, tente novamente em instantes.');
+       }
+     })
+    }
+   }
 
   protected override creationPageTitle(): string {
     return 'Criar novo pedido';

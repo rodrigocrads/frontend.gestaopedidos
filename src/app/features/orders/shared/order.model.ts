@@ -9,6 +9,7 @@ export class Order extends BaseResourceModel {
         public total?: number,
         public status?: OrderStatus,
         public client?: string,
+        public items?: any[]
     ){
         super();
     }

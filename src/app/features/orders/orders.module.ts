@@ -6,6 +6,8 @@ import { OrdersRoutingModule } from 'src/app/features/orders/orders.module-routi
 import { SharedModule } from 'src/app/shared/shared.module';
 import { IMaskModule } from 'angular-imask';
 import { CalendarModule } from 'primeng/calendar';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { CalendarModule } from 'primeng/calendar';
     SharedModule,
     IMaskModule,
     CalendarModule,
+    AutoCompleteModule,
+    FormsModule
   ]
 })
 export class OrdersModule {}
