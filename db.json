@@ -1,0 +1,325 @@
+{
+  "orders": [
+    {
+      "id": "cb577d82-da5a-4a9c-b8b0-4ee46e6beb00",
+      "details": "5 pipocas gourmet(morango);",
+      "deliveryDate": "08/08/2023",
+      "total": "39,90",
+      "status": "CONFIRMADO",
+      "client": "João da praça"
+    },
+    {
+      "id": "8cde6d14-9709-4efb-b146-3dc33cf9c129",
+      "details": "5 cones trufados de morango; 1 pt com 30 biscoitos amanteigados com recheio de goiabada;",
+      "deliveryDate": "24/08/2023",
+      "total": "340,90",
+      "status": "CONCLUIDO",
+      "client": "Danielle Cunha"
+    },
+    {
+      "id": "38ff092d-4f71-4bf5-8149-0b2911ad9e47",
+      "details": "50 biscoitos decorados do pikachu;",
+      "deliveryDate": "07/08/2023",
+      "total": "200,00",
+      "status": "CONCLUIDO",
+      "client": "Leandro Henrique"
+    },
+    {
+      "id": "8f202315-70e2-4f42-a4a9-5dda33a57fa8",
+      "details": "Detalhes do pedido",
+      "deliveryDate": "24/08/2023",
+      "total": "250,45",
+      "status": "AGUARDANDO_CONFIRMACAO",
+      "client": "Nome do cliente2"
+    },
+    {
+      "id": "412d0f09-9169-4d55-b1df-4ae76256f24e",
+      "details": "detalhes do pedido",
+      "deliveryDate": "07/08/2023",
+      "total": "1500,50",
+      "status": "CANCELADO",
+      "client": "Nome do cliente"
+    },
+    {
+      "id": "b63e8b01-af0d-47d0-b5ae-4b7cb765136c",
+      "details": "4 cones trufados; ",
+      "deliveryDate": "10/08/2023",
+      "total": "29,90",
+      "status": "CONCLUIDO",
+      "client": "Maria Cristina"
+    },
+    {
+      "id": "6aea647b-0d37-43ba-bcd0-793ef52d053c",
+      "details": "Detalhes do pedido;",
+      "deliveryDate": "30/08/2023",
+      "total": "25,90",
+      "status": "PENDENTE",
+      "client": "Nome do cliente"
+    },
+    {
+      "id": "366809c9-e538-4b00-9af9-844f00c744c4",
+      "details": "detalhes do pedido",
+      "deliveryDate": "28/07/2023",
+      "total": "200,00",
+      "status": "CONCLUIDO",
+      "client": "Nome do cliente"
+    },
+    {
+      "id": "b5b37fe5-08f3-47cf-b3db-5683ff0132fb",
+      "details": "detalhes do pedido",
+      "deliveryDate": "12/04/2023",
+      "total": "150,00",
+      "status": "CONCLUIDO",
+      "client": "Nome do cliente"
+    },
+    {
+      "id": "01cf49e5-2e37-4767-b348-fe9f931dc5b5",
+      "details": "pikachu com laçinho",
+      "deliveryDate": "20/12/2022",
+      "total": "750,00",
+      "status": "CONCLUIDO",
+      "client": "Leandro Henrique"
+    },
+    {
+      "id": "67431a23-897b-472f-8720-242d876e744a",
+      "details": "detalhes do pedido;",
+      "deliveryDate": "13/09/2023",
+      "total": "200,00",
+      "status": "CONCLUIDO",
+      "client": "João da praça"
+    },
+    {
+      "id": "66ce35d4-b851-4c55-bc34-74b67fce5d87",
+      "details": "10 biscoitos decorados; Endereço de entrega: rua qualquer;",
+      "deliveryDate": "27/09/2023",
+      "total": "250,00",
+      "status": "AGUARDANDO_CONFIRMACAO",
+      "client": "Carol mãe"
+    },
+    {
+      "id": "8868e6e0-0b94-41f5-a127-8c0fa987538b",
+      "details": "- 1 pote de biscoito escocês\n- 1 pote de biscoito casadinho",
+      "deliveryDate": "27/09/2023",
+      "total": "82,00",
+      "status": "CONFIRMADO",
+      "client": "Maria Clara"
+    },
+    {
+      "id": "3e7a646d-bd3e-456f-b575-e1d5b40e7daa",
+      "details": "asda",
+      "deliveryDate": "22/10/2023",
+      "total": "1500,50",
+      "status": "AGUARDANDO_CONFIRMACAO",
+      "client": "Nome do cliente",
+      "items": [
+        {
+          "name": {
+            "id": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb00",
+            "name": "Pote com 30 biscoitos de café",
+            "value": "29,90",
+            "status": "ATIVO",
+            "description": "Descrição do produto para testar",
+            "categoryId": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb21"
+          },
+          "id": ""
+        }
+      ]
+    },
+    {
+      "id": "a2e07c02-8d14-4949-a87d-52efc6c441f9",
+      "details": "detalhes",
+      "deliveryDate": "11/10/2023",
+      "total": "1500,50",
+      "status": "AGUARDANDO_CONFIRMACAO",
+      "client": "Nome do cliente",
+      "items": [
+        {
+          "product": {
+            "id": "41597f87-156f-498e-b760-83473cd94544",
+            "name": "Pote com 40 mini biscoitos com cobertura e raspas de chocolate belga",
+            "value": "42,00",
+            "status": "ATIVO",
+            "description": "Descrição do produto",
+            "categoryId": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb20"
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb00",
+            "name": "Pote com 30 biscoitos de café",
+            "value": "29,90",
+            "status": "ATIVO",
+            "description": "Descrição do produto para testar",
+            "categoryId": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb21"
+          },
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "805f0734-fffb-49ba-bfaf-3910f2fd29f1",
+      "details": "teste",
+      "deliveryDate": "17/10/2023",
+      "total": "340,90",
+      "status": "AGUARDANDO_CONFIRMACAO",
+      "client": "Nome do cliente",
+      "items": [
+        {
+          "product": [
+            "",
+            [
+              null
+            ]
+          ],
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "c2f18cbd-d4b9-4fc9-b4db-2d71ac8e69ef",
+      "details": "teste",
+      "deliveryDate": "18/10/2023",
+      "total": "340,90",
+      "status": "AGUARDANDO_CONFIRMACAO",
+      "client": "Nome do cliente",
+      "items": [
+        {
+          "product": {
+            "id": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb00",
+            "name": "Pote com 30 biscoitos de café",
+            "value": "29,90",
+            "status": "ATIVO",
+            "description": "Descrição do produto para testar",
+            "categoryId": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb21"
+          },
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "974fe266-f743-4bf2-b985-59b593943dfa",
+      "details": "Detalhes do pedido",
+      "deliveryDate": "01/11/2023",
+      "total": "750,00",
+      "status": "AGUARDANDO_CONFIRMACAO",
+      "client": "Nome do cliente",
+      "items": [
+        {
+          "product": {
+            "id": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb00",
+            "name": "Pote com 30 biscoitos de café",
+            "value": "29,90",
+            "status": "ATIVO",
+            "description": "Descrição do produto para testar",
+            "categoryId": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb21"
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "41597f87-156f-498e-b760-83473cd94544",
+            "name": "Pote com 40 mini biscoitos com cobertura e raspas de chocolate belga",
+            "value": "42,00",
+            "status": "ATIVO",
+            "description": "Descrição do produto",
+            "categoryId": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb20"
+          },
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "id": "35974627-1576-4e2e-82d3-7a07843da21c",
+      "details": "Detalhes",
+      "deliveryDate": "30/10/2023",
+      "total": "1697,00",
+      "status": "AGUARDANDO_CONFIRMACAO",
+      "client": "Danielle",
+      "items": [
+        {
+          "product": {
+            "id": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb00",
+            "name": "Pote com 30 biscoitos de café",
+            "value": "29,90",
+            "status": "ATIVO",
+            "description": "Descrição do produto para testar",
+            "categoryId": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb21"
+          },
+          "quantity": 3
+        },
+        {
+          "product": {
+            "id": "842207b5-fece-42ed-a637-c22f5236cfaa",
+            "name": "Biscoito escocês - pote com 40 mini biscoitos",
+            "value": "40,00",
+            "status": "ATIVO",
+            "description": "",
+            "categoryId": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb20"
+          },
+          "quantity": 2
+        }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb00",
+      "name": "Pote com 30 biscoitos de café",
+      "value": "29,90",
+      "status": "ATIVO",
+      "description": "Descrição do produto para testar",
+      "categoryId": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb21"
+    },
+    {
+      "id": "41597f87-156f-498e-b760-83473cd94544",
+      "name": "Pote com 40 mini biscoitos com cobertura e raspas de chocolate belga",
+      "value": "42,00",
+      "status": "ATIVO",
+      "description": "Descrição do produto",
+      "categoryId": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb20"
+    },
+    {
+      "id": "69142d46-1a38-472a-ae79-d0d30b66b26f",
+      "name": "Pote com 60 mini biscoitos casadinhos",
+      "value": "38,00",
+      "status": "ATIVO",
+      "description": "",
+      "categoryId": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb20"
+    },
+    {
+      "id": "842207b5-fece-42ed-a637-c22f5236cfaa",
+      "name": "Biscoito escocês - pote com 40 mini biscoitos",
+      "value": "40,00",
+      "status": "ATIVO",
+      "description": "",
+      "categoryId": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb20"
+    },
+    {
+      "id": "79a75676-5a7c-41e6-975e-535cda45f9ce",
+      "name": "Mini petisqueira doce com biscoitos",
+      "value": "35,00",
+      "status": "ATIVO",
+      "description": "",
+      "categoryId": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb20"
+    },
+    {
+      "id": "1ff38ad9-b3ea-468e-8297-a4be5de57de2",
+      "name": "Nome do produto",
+      "value": "40,00",
+      "status": "INATIVO",
+      "description": "Descrição do produto",
+      "categoryId": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb20"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb20",
+      "name": "Biscoitos Amanteigados"
+    },
+    {
+      "id": "cb555d82-da5a-4a9c-b8b0-4ee46e6beb21",
+      "name": "Biscoitos Decorados"
+    }
+  ]
+}
