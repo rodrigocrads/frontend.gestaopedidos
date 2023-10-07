@@ -6,7 +6,7 @@ import { OrderService } from '../shared/order.service';
 import { FormArray, Validators } from '@angular/forms';
 import { Product } from '../../products/shared/product.model';
 import { ProductService } from '../../products/shared/product.service';
-import { switchMap } from 'rxjs';
+import { reduce, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-order-form',
@@ -74,7 +74,16 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
     return this.form["items"] as FormArray;
   }
 
-  public addItem() {
+  public subtotal(orderItemIndex: number): number {
+    const orderItem = this.resourceForm.value.items[orderItemIndex];
+    return orderItem.product?.value?.replace(",", ".") * orderItem.quantity;
+  }
+
+  public total(): number {
+    return this.resourceForm.value.items.reduce((acc: number, curr: any) => acc + curr.product?.value?.replace(",", ".") * curr.quantity, 0);
+  }
+
+  public addNewItem() {
     const itemForm = this.formBuilder.group({ product: '', quantity: 1 });
     this.items.push(itemForm);
   }
@@ -103,8 +112,8 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
        next: (resource: any) => {
          this.resource = resource;
          this.deleteItem(0);
-         this.resource.items?.forEach(() => this.addItem())
-         this.resourceForm.patchValue(resource); // binds loaded resource data to ResourceForm 
+         this.resource.items?.forEach(() => this.addNewItem())
+         this.resourceForm.patchValue(resource); // binds loaded resource data to ResourceForm
        },
        error: error => {
          alert('Ocorreu um erro no servidor, tente novamente em instantes.');

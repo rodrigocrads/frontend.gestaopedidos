@@ -51,71 +51,71 @@
                             <div class="col-md-1">
                                 <a (click)="deleteItem(i);" class="align-self-end btn btn-danger btn-lg mt-4"><i class="fa fa-trash"></i></a>
                             </div>
+                            <div class="col-md-2">
+                                Subtotal: R$ {{ subtotal(i) }}
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-4 text-center">
-                        <a (click)="addItem();" class="align-self-end btn btn-success btn-block btn-lg">+ Adicionar Item</a>
+                        <a (click)="addNewItem();" class="align-self-end btn btn-success btn-block btn-lg">+ Adicionar Item</a>
                     </div>
                 </div>
             </fieldset>
 
-            <fieldset>
-                <legend>Dados do pedido:</legend>
-                <div class="form-row">
-                    <!-- Valor total -->
-                    <div class="form-group col-md-2">
-                        <label for="total">Valor total</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">R$</div>
-                            </div>
-                            <input [imask]="imaskConfig" class="form-control" id="total" formControlName="total" />
+            <div class="form-row">
+                <!-- Valor total -->
+                <div class="form-group col-md-2">
+                    <label for="total">Valor total</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">R$</div>
                         </div>
-                        <app-form-field-error [form-control]="form['total']"></app-form-field-error>
+                        <input [imask]="imaskConfig" class="form-control" id="total" formControlName="total" [value]="total()" />
                     </div>
-    
-                    <!-- Data da entrega -->
-                    <div class="form-group col-md-2">
-                        <label for="deliveryDate">Data da entrega</label><br>
-                        <p-calendar
-                            [style]="{'width':'100%'}"
-                            id="deliveryDate"
-                            inputStyleClass="form-control"
-                            dataType="string"
-                            dateFormat="dd/mm/yy"
-                            [showButtonBar]="true"
-                            formControlName="deliveryDate"
-                        >
-                        </p-calendar>
-                        <app-form-field-error [form-control]="form['deliveryDate']"></app-form-field-error>
-                    </div>
-    
-                    <!-- Status do Pedido -->
-                    <div class="form-group col-md-3">
-                        <label for="status">Status pedido</label><br>
-                        <select name="status" id="status" formControlName="status" class="form-control">
-                            <option *ngFor="let status of statusOptions" [value]="status.value">{{ status.label }}</option>
-                        </select>
-                        <app-form-field-error [form-control]="form['status']"></app-form-field-error>
-                    </div>
+                    <app-form-field-error [form-control]="form['total']"></app-form-field-error>
                 </div>
-                <div class="form-row">
-                    <!-- Detalhes do pedido -->
-                    <div class="form-group col-md-5">
-                        <label for="details">Detalhes do pedido</label>
-                        <textarea
-                            class="form-control"
-                            id="details"
-                            formControlName="details"
-                            rows="6"
-                        >
-                        </textarea>
-                        <app-form-field-error [form-control]="form['details']"></app-form-field-error>
-                    </div>
+
+                <!-- Data da entrega -->
+                <div class="form-group col-md-2">
+                    <label for="deliveryDate">Data da entrega</label><br>
+                    <p-calendar
+                        [style]="{'width':'100%'}"
+                        id="deliveryDate"
+                        inputStyleClass="form-control"
+                        dataType="string"
+                        dateFormat="dd/mm/yy"
+                        [showButtonBar]="true"
+                        formControlName="deliveryDate"
+                    >
+                    </p-calendar>
+                    <app-form-field-error [form-control]="form['deliveryDate']"></app-form-field-error>
                 </div>
-            </fieldset>
+
+                <!-- Status do Pedido -->
+                <div class="form-group col-md-3">
+                    <label for="status">Status pedido</label><br>
+                    <select name="status" id="status" formControlName="status" class="form-control">
+                        <option *ngFor="let status of statusOptions" [value]="status.value">{{ status.label }}</option>
+                    </select>
+                    <app-form-field-error [form-control]="form['status']"></app-form-field-error>
+                </div>
+            </div>
+            <div class="form-row">
+                <!-- Detalhes do pedido -->
+                <div class="form-group col-md-5">
+                    <label for="details">Detalhes do pedido</label>
+                    <textarea
+                        class="form-control"
+                        id="details"
+                        formControlName="details"
+                        rows="6"
+                    >
+                    </textarea>
+                    <app-form-field-error [form-control]="form['details']"></app-form-field-error>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-12">
