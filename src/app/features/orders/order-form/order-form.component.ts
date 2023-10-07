@@ -70,7 +70,7 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
   protected override buildResourceForm(): void {
     this.resourceForm = this.formBuilder.group({
       id: [null],
-      details: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      details: ['', [Validators.maxLength(255)]],
       client: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]],
       deliveryDate: ['', [Validators.required]],
       total: ['', [Validators.required]],
