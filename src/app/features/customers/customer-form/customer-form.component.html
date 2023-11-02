@@ -1,0 +1,99 @@
+<app-bread-crumb
+    [items]="[{text: 'Clientes', link: '/customers'}, {text: pageTitle}]"
+/>
+
+<app-page-header
+    [page-title]="pageTitle"
+    btn-class="btn-dark"
+    btn-text="<< Voltar"
+    btn-link="/customers"
+/>
+
+<form [formGroup]="resourceForm" (submit)="submitForm()">
+    <div class="card">
+        <div class="card-header">
+            Informações sobre o cliente
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <!-- Nome do Cliente -->
+                <div class="form-group col-md-6">
+                    <label for="name">Nome do Cliente</label>
+                    <input class="form-control" id="name" formControlName="name" />
+
+                    <app-form-field-error [form-control]="form['name']" />
+                </div>
+
+                <!-- Celular -->
+                <div class="form-group col-md-3">
+                    <label for="cellphone">Número do Celular</label>
+                    <input class="form-control" id="cellphone" formControlName="cellphone" />
+
+                    <app-form-field-error [form-control]="form['cellphone']" />
+                </div>
+            </div>
+
+            <fieldset class="mb-5 mt-3">
+                <legend>Endereço de entrega:</legend>
+                <div class="form-row" formGroupName="address">
+                    <!-- Endereço -->
+                    <div class="form-group col-md-5">
+                        <label for="address">Logradouro</label>
+                        <input class="form-control" id="address" formControlName="address" />
+    
+                        <app-form-field-error [form-control]="form['address']" />
+                    </div>
+    
+                    <div class="form-group col-md-2">
+                        <label for="number">Número</label>
+                        <input class="form-control" id="number" formControlName="number" />
+    
+                        <app-form-field-error [form-control]="form['number']" />
+                    </div>
+    
+                    <div class="form-group col-md-5">
+                        <label for="complement">Complemento</label>
+                        <input class="form-control" id="complement" formControlName="complement" />
+    
+                        <app-form-field-error [form-control]="form['complement']" />
+                    </div>
+    
+                    <div class="form-group col-md-6">
+                        <label for="neighborhood">Bairro</label>
+                        <input class="form-control" id="neighborhood" formControlName="neighborhood" />
+    
+                        <app-form-field-error [form-control]="form['neighborhood']" />
+                    </div>
+    
+                    <div class="form-group col-md-6">
+                        <label for="city">Cidade</label>
+                        <input class="form-control" id="city" formControlName="city" />
+    
+                        <app-form-field-error [form-control]="form['city']" />
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="mb-5 mt-3">
+                <legend>Informação adicional:</legend>
+                <div class="row">
+                    <!-- Data de aniversário -->
+                    <div class="form-group col-md-3">
+                        <label for="birthday">Data aniversário</label>
+                        <input class="form-control" id="birthday" formControlName="birthday" />
+    
+                        <app-form-field-error [form-control]="form['birthday']" />
+                    </div>
+                </div>
+            </fieldset>
+
+            <button
+                [disabled]="submittingForm || resourceForm.invalid"
+                type="submit"
+                class="btn btn-primary btn-lg float-right mt-4"
+            >
+                Salvar
+            </button>
+        </div>
+    </div>
+</form>
