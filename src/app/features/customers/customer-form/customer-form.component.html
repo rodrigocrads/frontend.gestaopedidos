@@ -31,6 +31,16 @@
 
                     <app-form-field-error [form-control]="form['cellphone']" />
                 </div>
+
+                <!-- Status do Cliente -->
+                <div class="form-group col-md-2">
+                    <label for="status">Status</label><br>
+                    <select name="status" id="status" formControlName="status" class="form-control">
+                        <option [value]="'ATIVO'">Ativo</option>
+                        <option [value]="'INATIVO'">Inativo</option>
+                    </select>
+                    <app-form-field-error [form-control]="form['status']"></app-form-field-error>
+                </div>
             </div>
 
             <fieldset class="mb-5 mt-3">

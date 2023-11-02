@@ -7,7 +7,8 @@ export class Customer extends BaseResourceModel {
         public name?: string,
         public address?: Address,
         public cellphone?: string,
-        public status?: string
+        public status?: string,
+        public birthday?: string
     ) {
         super();
     }
