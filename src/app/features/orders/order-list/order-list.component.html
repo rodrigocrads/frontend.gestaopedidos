@@ -65,8 +65,8 @@
                         </span>
                     </td>
                     <td>
-                        <a [routerLink]="[order.id, 'edit']" class="btn btn-outline-info btn-sm mr-2">Editar</a>
-                        <button (click)="delete(order)" class="btn btn-outline-info btn-sm">Excluir</button>
+                        <a [routerLink]="[order.id, 'edit']" class="btn btn-warning btn-sm mr-2"><i class="fa fa-edit"></i></a>
+                        <button (click)="delete(order)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
             </tbody>

@@ -64,8 +64,8 @@
                         {{ product.status === 'ATIVO' ? 'ATIVO' : 'INATIVO' }}
                     </td>
                     <td>
-                        <a [routerLink]="[product.id, 'edit']" class="btn btn-outline-info btn-sm mr-2">Editar</a>
-                        <button (click)="delete(product)" class="btn btn-outline-info btn-sm">Excluir</button>
+                        <a [routerLink]="[product.id, 'edit']" class="btn btn-warning btn-sm mr-2"><i class="fa fa-edit"></i></a>
+                        <button (click)="delete(product)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
             </tbody>

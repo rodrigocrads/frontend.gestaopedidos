@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { BaseFormComponent } from 'src/app/shared/components/base-form/base-form.component';
 import { Order } from '../shared/order.model';
@@ -14,6 +14,8 @@ import { reduce, switchMap } from 'rxjs';
   styleUrls: ['./order-form.component.scss']
 })
 export class OrderFormComponent extends BaseFormComponent<Order> implements OnInit {
+  @ViewChild('activeCalculateTotalValue', { static: true, read: ElementRef })
+  activeCalculateTotalValue: ElementRef|undefined;
   typeOptions: Array<{label: string, value: string}> = [];
   statusOptions = Order.getStatusOptions();
 
@@ -47,6 +49,15 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
     });
   }
 
+  togglActiveCalculateTotalValue() {
+    const element = this.activeCalculateTotalValue?.nativeElement;
+    if (element.value === 'on') {
+      element.value = 'off';
+      return;
+    }
+    element.value = 'on';
+  }
+
   imaskConfig = {
     mask: Number,
     scale: 2,
@@ -59,7 +70,7 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
   protected override buildResourceForm(): void {
     this.resourceForm = this.formBuilder.group({
       id: [null],
-      details: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      details: ['', [Validators.maxLength(255)]],
       client: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]],
       deliveryDate: ['', [Validators.required]],
       total: ['', [Validators.required]],
@@ -76,15 +87,24 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
 
   public subtotal(orderItemIndex: number): number {
     const orderItem = this.resourceForm.value.items[orderItemIndex];
-    const productValue = orderItem.product?.value;
-    if (productValue) {
-      return productValue.replace(",", ".") * orderItem.quantity;
+
+    if (!orderItem.product?.value) {
+      return 0;
     }
-    return 0;
+
+    return orderItem.product?.value?.replace(",", ".") * orderItem.quantity;
   }
 
-  public total(): number {
-    return this.resourceForm.value.items.reduce((acc: number, curr: any) => acc + curr.product?.value?.replace(",", ".") * curr.quantity, 0);
+  public total(): number|undefined {
+    if (!this.isActiveTotalCalculate()) return 0;
+
+    return this.resourceForm
+      .value
+      .items
+      .reduce((acc: number, curr: any) => {
+        if (!curr?.product?.value) return acc;
+        return acc + curr.product?.value?.replace(",", ".") * curr.quantity;
+      }, 0);
   }
 
   public addNewItem() {
@@ -132,5 +152,10 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
 
   protected override editionPageTitle(): string {
     return 'Editando o pedido';
+  }
+
+  private isActiveTotalCalculate(): boolean {
+    const element = this.activeCalculateTotalValue?.nativeElement;
+    return element?.value === 'on';
   }
 }
