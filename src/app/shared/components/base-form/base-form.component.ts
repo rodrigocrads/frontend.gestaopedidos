@@ -46,14 +46,14 @@ export abstract class BaseFormComponent<T extends BaseResourceModel> implements 
     return this.resourceForm.controls;
   }
 
-  public submitForm() {
+  public submitForm(): void {
     this.submittingForm = true;
 
     if (this.currentAction === 'new') {
       this.createResource();
-    } else {
+      return;
+    } 
       this.updateResource();
-    }
   }
 
   protected loadResource() {
@@ -68,7 +68,7 @@ export abstract class BaseFormComponent<T extends BaseResourceModel> implements 
         this.resource = resource;
         this.resourceForm.patchValue(resource); // binds loaded resource data to ResourceForm 
       },
-      error: error => {
+      error: () => {
         alert('Ocorreu um erro no servidor, tente novamente em instantes.');
       }
     })
@@ -84,9 +84,9 @@ export abstract class BaseFormComponent<T extends BaseResourceModel> implements 
   protected setPageTitle() {
     if (this.currentAction == 'new') {
       this.pageTitle = this.creationPageTitle();
-    } else {
-      this.pageTitle = this.editionPageTitle();
+      return;
     }
+    this.pageTitle = this.editionPageTitle();
   }
 
   protected creationPageTitle(): string {
@@ -100,7 +100,8 @@ export abstract class BaseFormComponent<T extends BaseResourceModel> implements 
   protected createResource() {
     const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
 
-    this.resourceService.create(resource)
+    this.resourceService
+      .create(resource)
       .subscribe({
         next: (resource) => this.actionsForSuccess(resource),
         error: (error) => this.actionsForError(error),
