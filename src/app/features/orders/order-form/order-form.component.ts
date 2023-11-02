@@ -76,7 +76,11 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
 
   public subtotal(orderItemIndex: number): number {
     const orderItem = this.resourceForm.value.items[orderItemIndex];
-    return orderItem.product?.value?.replace(",", ".") * orderItem.quantity;
+    const productValue = orderItem.product?.value;
+    if (productValue) {
+      return productValue.replace(",", ".") * orderItem.quantity;
+    }
+    return 0;
   }
 
   public total(): number {
