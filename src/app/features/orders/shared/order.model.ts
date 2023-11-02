@@ -4,7 +4,7 @@ import { OrderStatus } from "./order-status.enum";
 export class Order extends BaseResourceModel {
     constructor(
         public override id?: string,
-        public details?: string,
+        public observations?: string,
         public deliveryDate?: string,
         public total?: number,
         public status?: OrderStatus,
