@@ -45,6 +45,6 @@ export class FormFieldErrorComponent {
   }
 
   private mustShowErrorMessage(): boolean {
-    return this.formControl.invalid && this.formControl.touched;
+    return this.formControl?.invalid && this.formControl?.touched;
   }
 }
