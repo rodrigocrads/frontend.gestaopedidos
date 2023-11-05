@@ -7,6 +7,8 @@ import { FormArray, Validators } from '@angular/forms';
 import { Product } from '../../products/shared/product.model';
 import { ProductService } from '../../products/shared/product.service';
 import { reduce, switchMap } from 'rxjs';
+import { Customer } from '../../customers/shared/customer.model';
+import { CustomerService } from '../../customers/shared/customer.service';
 
 @Component({
   selector: 'app-order-form',
@@ -20,12 +22,14 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
   statusOptions = Order.getStatusOptions();
 
   filteredProducts: Product[] = [];
+  filteredCustomers: Customer[] = [];
   selectedProduct: Product = {};
 
   constructor(
     private primeNgConfig: PrimeNGConfig,
     protected orderService: OrderService,
     protected productService: ProductService,
+    protected customerService: CustomerService,
     protected override injector: Injector
   ) {
     super(injector, new Order(), orderService, Order.fromJson);
@@ -71,7 +75,18 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
     this.resourceForm = this.formBuilder.group({
       id: [null],
       observations: ['', [Validators.maxLength(255)]],
-      client: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]],
+      customer: this.formBuilder.group({
+        id: [null],
+        cellphone: ['', [Validators.required]],
+        name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]],
+        address: this.formBuilder.group({
+          address: ['', [Validators.required]], 
+          number: ['', [Validators.required]],
+          complement: [''],
+          neighborhood: ['', [Validators.required]],
+          city: ['', [Validators.required]],
+        }),
+      }),
       deliveryDate: ['', [Validators.required]],
       total: ['', [Validators.required]],
       status: ['AGUARDANDO_CONFIRMACAO'],
@@ -93,6 +108,15 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
     }
 
     return orderItem.product?.value?.replace(",", ".") * orderItem.quantity;
+  }
+
+  public onSelectedCustomer(customer: Customer) {
+    this.resourceForm.get('customer')?.setValue({
+      id: customer.id,
+      name: customer.name,
+      address: customer.address,
+      cellphone: customer.cellphone,
+    });
   }
 
   public total(): number|undefined {
@@ -122,6 +146,15 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
       .subscribe({
         next: resources => this.filteredProducts = resources,
         error: () => alert('Erro ao tentar carregar a lista de produtos com filtros')
+    });
+  }
+
+  public filterCustomer(event: any) {
+    this.customerService
+      .listByFilters([{key: 'name_like', value: event.query}])
+      .subscribe({
+        next: resources => this.filteredCustomers = resources,
+        error: () => alert('Erro ao tentar carregar a lista de clientes com filtros')
     });
   }
 
