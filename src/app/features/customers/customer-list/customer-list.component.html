@@ -10,25 +10,6 @@
 />
 
 <div class="card">
-    <div class="card-header">
-        Filtros de busca
-    </div>
-    <div class="card-body table-responsive">
-        <form>
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <!-- <label for="status">Categoria</label>
-                    <select #filterCategory class="form-control" name="status" (change)="filterByCategory($event)">
-                        <option value="">Todos</option>
-                        <option *ngFor="let option of categoriesOptions" [value]="option.value">{{ option.label }}</option>
-                    </select> -->
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-<div class="card">
     <div class="card-body table-responsive">
 
         <div style="text-align: center;" *ngIf="resources.length === 0">
@@ -40,6 +21,7 @@
                 <tr>
                     <th>Nome</th>
                     <th>Endereço</th>
+                    <th>Celular</th>
                     <th>Data de aniverário</th>
                     <th>Status</th>
                     <th>Ações</th>
@@ -58,6 +40,9 @@
                             {{ customer.address?.neighborhood }},
                             {{ customer.address?.city }}
                         </small>
+                    </td>
+                    <td>
+                        {{ customer.cellphone }}
                     </td>
                     <td>
                         {{ customer.birthday }}
