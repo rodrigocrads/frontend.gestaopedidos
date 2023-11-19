@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ClientsRoutingModule } from './customers.module-routing';
 import { IMaskModule } from 'angular-imask';
 import { CalendarModule } from 'primeng/calendar';
+import {InputMaskModule} from 'primeng/inputmask';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CalendarModule } from 'primeng/calendar';
     CommonModule,
     SharedModule,
     CalendarModule,
+    InputMaskModule,
   ]
 })
 export class CustomersModule {}

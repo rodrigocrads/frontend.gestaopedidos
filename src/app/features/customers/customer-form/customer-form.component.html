@@ -27,13 +27,13 @@
                 <!-- Celular -->
                 <div class="form-group col-md-3">
                     <label for="cellphone">Número do Celular</label>
-                    <input class="form-control" id="cellphone" formControlName="cellphone" />
+                    <p-inputMask [style]="{'width':'100%', 'border-color': '#6c757d', 'background': '#343a40', 'height': '38px'}" mask="(99)99999-9999" id="cellphone" formControlName="cellphone"></p-inputMask>
 
                     <app-form-field-error [form-control]="form['cellphone']" />
                 </div>
 
                 <!-- Status do Cliente -->
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="status">Status</label><br>
                     <select name="status" id="status" formControlName="status" class="form-control">
                         <option [value]="'ATIVO'">Ativo</option>

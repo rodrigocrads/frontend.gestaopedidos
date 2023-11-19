@@ -43,7 +43,7 @@ export class CustomerFormComponent extends BaseFormComponent<Customer> implement
         city: ['', [Validators.required]],
       }),
       cellphone: ['', [Validators.required]],
-      status: ['', [Validators.required]],
+      status: ['ATIVO', [Validators.required]],
       birthday: [null]
     });
   }
