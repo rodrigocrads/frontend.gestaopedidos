@@ -45,7 +45,7 @@
                         {{ customer.cellphone }}
                     </td>
                     <td>
-                        {{ customer.birthday }}
+                        {{ customer.birthday ? customer.birthday : 'Não informado' }}
                     </td>
                     <td>
                         {{ customer.status === 'ATIVO' ? 'ATIVO' : 'INATIVO' }}
