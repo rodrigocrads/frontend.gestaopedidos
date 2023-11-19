@@ -6,6 +6,7 @@ import { OrdersRoutingModule } from 'src/app/features/orders/orders.module-routi
 import { SharedModule } from 'src/app/shared/shared.module';
 import { IMaskModule } from 'angular-imask';
 import { CalendarModule } from 'primeng/calendar';
+import {InputMaskModule} from 'primeng/inputmask';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule }   from '@angular/forms';
 
@@ -21,6 +22,7 @@ import { FormsModule }   from '@angular/forms';
     IMaskModule,
     CalendarModule,
     AutoCompleteModule,
+    InputMaskModule,
     FormsModule
   ]
 })
