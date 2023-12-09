@@ -47,7 +47,7 @@
             <tbody>
                 <tr *ngFor="let order of resources">
                     <td>
-                        <b>{{ order.client }}</b>
+                        <b>{{ order.customer?.name }}</b>
                         <br />
                         <small [title]="order.observations">
                             {{ format(order.observations || '') }}

@@ -1,5 +1,6 @@
 import { BaseResourceModel } from "src/app/shared/models/base-resource.model";
 import { OrderStatus } from "./order-status.enum";
+import { Customer } from "../../customers/shared/customer.model";
 
 export class Order extends BaseResourceModel {
     constructor(
@@ -8,7 +9,7 @@ export class Order extends BaseResourceModel {
         public deliveryDate?: string,
         public total?: number,
         public status?: OrderStatus,
-        public client?: string,
+        public customer?: Customer,
         public items?: any[]
     ){
         super();

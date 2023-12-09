@@ -10,93 +10,101 @@
 />
 
 <form [formGroup]="resourceForm" (submit)="submitForm()">
+    <!-- Informações do cliente -->
+    <div class="card">
+        <div class="card-header">
+            Dados do cliente
+        </div>
+
+        <div class="card-body">
+            <div formGroupName="customer">
+                <!-- Nome do cliente -->
+                <div class="form-row">
+                    <!-- Nome do cliente -->
+                    <div class="form-group col-md-5">
+                        <label for="customer">Nome do cliente</label>
+                            <p-autoComplete
+                                [style]="{'width':'100%'}"
+                                [inputStyle]="{'width':'100%', 'border-color': '#6c757d', 'background': '#343a40', 'height': '38px'}"
+                                [suggestions]="filteredCustomers"
+                                (completeMethod)="filterCustomer($event)"
+                                placeholder="Digite o nome do cliente ..."
+                                (onSelect)="onSelectedCustomer($event)"
+                                formControlName="customer"
+                                field="name"
+                            >
+                            </p-autoComplete>
+                        <app-form-field-error [form-control]="form['customer']"></app-form-field-error>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <!-- Celular -->
+                    <div class="form-group col-md-2">
+                        <label for="cellphone">N° Celular</label>
+                        <p-inputMask
+                            [style]="{'width':'100%', 'border-color': '#6c757d', 'background': '#343a40', 'height': '38px'}"
+                            mask="(99)99999-9999"
+                            id="cellphone"
+                            formControlName="cellphone"
+                        />
+    
+                        <app-form-field-error [form-control]="form['cellphone']" />
+                    </div>
+                </div>
+
+                <!-- Endereço de entrega -->
+                <fieldset class="mb-5 mt-3">
+                    <legend>Endereço de entrega:</legend>
+                    <div class="form-row" formGroupName="address">
+                        <!-- Endereço -->
+                        <div class="form-group col-md-5">
+                            <label for="address">Logradouro</label>
+                            <input class="form-control" id="address" formControlName="address" />
+        
+                            <app-form-field-error [form-control]="form['address']" />
+                        </div>
+        
+                        <div class="form-group col-md-2">
+                            <label for="number">Número</label>
+                            <input class="form-control" id="number" formControlName="number" />
+        
+                            <app-form-field-error [form-control]="form['number']" />
+                        </div>
+        
+                        <div class="form-group col-md-5">
+                            <label for="complement">Complemento</label>
+                            <input class="form-control" id="complement" formControlName="complement" />
+        
+                            <app-form-field-error [form-control]="form['complement']" />
+                        </div>
+        
+                        <div class="form-group col-md-6">
+                            <label for="neighborhood">Bairro</label>
+                            <input class="form-control" id="neighborhood" formControlName="neighborhood" />
+        
+                            <app-form-field-error [form-control]="form['neighborhood']" />
+                        </div>
+        
+                        <div class="form-group col-md-6">
+                            <label for="city">Cidade</label>
+                            <input class="form-control" id="city" formControlName="city" />
+        
+                            <app-form-field-error [form-control]="form['city']" />
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <!-- Informações do pedido-->
     <div class="card">
         <div class="card-header">
             Informações sobre o pedido
         </div>
 
         <div class="card-body">
-            <fieldset class="mb-5 mt-3">
-                <legend>Dados do cliente:</legend>
-                <div formGroupName="customer">
-                    <!-- Nome do cliente -->
-                    <div class="form-row">
-                        <!-- Nome do cliente -->
-                        <div class="form-group col-md-5">
-                            <label for="customer">Nome do cliente</label>
-                                <p-autoComplete
-                                    [style]="{'width':'100%'}"
-                                    [inputStyle]="{'width':'100%', 'border-color': '#6c757d', 'background': '#343a40', 'height': '38px'}"
-                                    [suggestions]="filteredCustomers"
-                                    (completeMethod)="filterCustomer($event)"
-                                    placeholder="Digite o nome do cliente ..."
-                                    (onSelect)="onSelectedCustomer($event)"
-                                    field="name"
-                                >
-                                </p-autoComplete>
-                            <app-form-field-error [form-control]="form['customer']"></app-form-field-error>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <!-- Celular -->
-                        <div class="form-group col-md-3">
-                            <label for="cellphone">Número do Celular</label>
-                            <p-inputMask
-                                [style]="{'width':'100%', 'border-color': '#6c757d', 'background': '#343a40', 'height': '38px'}"
-                                mask="(99)99999-9999"
-                                id="cellphone"
-                                formControlName="cellphone"
-                            />
-        
-                            <app-form-field-error [form-control]="form['cellphone']" />
-                        </div>
-                    </div>
-
-                    <!-- Endereço de entrega -->
-                    <fieldset class="mb-5 mt-3">
-                        <legend>Endereço de entrega:</legend>
-                        <div class="form-row" formGroupName="address">
-                            <!-- Endereço -->
-                            <div class="form-group col-md-5">
-                                <label for="address">Logradouro</label>
-                                <input class="form-control" id="address" formControlName="address" />
-            
-                                <app-form-field-error [form-control]="form['address']" />
-                            </div>
-            
-                            <div class="form-group col-md-2">
-                                <label for="number">Número</label>
-                                <input class="form-control" id="number" formControlName="number" />
-            
-                                <app-form-field-error [form-control]="form['number']" />
-                            </div>
-            
-                            <div class="form-group col-md-5">
-                                <label for="complement">Complemento</label>
-                                <input class="form-control" id="complement" formControlName="complement" />
-            
-                                <app-form-field-error [form-control]="form['complement']" />
-                            </div>
-            
-                            <div class="form-group col-md-6">
-                                <label for="neighborhood">Bairro</label>
-                                <input class="form-control" id="neighborhood" formControlName="neighborhood" />
-            
-                                <app-form-field-error [form-control]="form['neighborhood']" />
-                            </div>
-            
-                            <div class="form-group col-md-6">
-                                <label for="city">Cidade</label>
-                                <input class="form-control" id="city" formControlName="city" />
-            
-                                <app-form-field-error [form-control]="form['city']" />
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </fieldset>
-
             <fieldset class="mb-5 mt-3">
                 <legend>Itens do pedido:</legend>
                 <div class="custom-control custom-switch mb-3">
@@ -199,21 +207,21 @@
                     <app-form-field-error [form-control]="form['observations']"></app-form-field-error>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <button
-                        [disabled]="submittingForm || resourceForm.invalid"
-                        type="submit"
-                        class="btn btn-primary btn-lg float-right mt-4"
-                    >
-                        Salvar dados
-                    </button>
-                </div>
-            </div>
-            
         </div>
     </div>
 
-    
+    <div class="row">
+        <div class="col-12">
+            <button
+                [disabled]="submittingForm || resourceForm.invalid"
+                type="submit"
+                class="btn btn-primary btn-lg float-right mt-4"
+            >
+                Salvar dados
+            </button>
+        </div>
+    </div>
+
+    <br>
+
 </form>
