@@ -17,46 +17,30 @@
         </div>
 
         <div class="card-body">
-            <div formGroupName="customer">
+            <div class="form-row">
                 <!-- Nome do cliente -->
-                <div class="form-row">
-                    <!-- Nome do cliente -->
-                    <div class="form-group col-md-5">
-                        <label for="customer">Nome do cliente</label>
-                            <p-autoComplete
-                                [style]="{'width':'100%'}"
-                                [inputStyle]="{'width':'100%', 'border-color': '#6c757d', 'background': '#343a40', 'height': '38px'}"
-                                [suggestions]="filteredCustomers"
-                                (completeMethod)="filterCustomer($event)"
-                                placeholder="Digite o nome do cliente ..."
-                                (onSelect)="onSelectedCustomer($event)"
-                                formControlName="customer"
-                                field="name"
-                            >
-                            </p-autoComplete>
-                        <app-form-field-error [form-control]="form['customer']"></app-form-field-error>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <!-- Celular -->
-                    <div class="form-group col-md-2">
-                        <label for="cellphone">N° Celular</label>
-                        <p-inputMask
-                            [style]="{'width':'100%', 'border-color': '#6c757d', 'background': '#343a40', 'height': '38px'}"
-                            mask="(99)99999-9999"
-                            id="cellphone"
-                            formControlName="cellphone"
-                        />
-    
-                        <app-form-field-error [form-control]="form['cellphone']" />
+                <div class="form-group col-md-5">
+                    <label for="customer">Nome do cliente</label>
+                        <p-autoComplete
+                            [style]="{'width':'100%'}"
+                            [inputStyle]="{'width':'100%', 'border-color': '#6c757d', 'background': '#343a40', 'height': '38px'}"
+                            [suggestions]="filteredCustomers"
+                            (completeMethod)="filterCustomer($event)"
+                            placeholder="Digite o nome do cliente ..."
+                            (onSelect)="onSelectedCustomer($event)"
+                            formControlName="customer"
+                            field="name"
+                            [(ngModel)]="selectedCustomer"
+                        >
+                        </p-autoComplete>
+                        <app-form-field-error [form-control]="form['name']"></app-form-field-error>
                     </div>
                 </div>
 
                 <!-- Endereço de entrega -->
                 <fieldset class="mb-5 mt-3">
                     <legend>Endereço de entrega:</legend>
-                    <div class="form-row" formGroupName="address">
+                    <div class="form-row" formGroupName="deliveryAddress">
                         <!-- Endereço -->
                         <div class="form-group col-md-5">
                             <label for="address">Logradouro</label>
@@ -96,7 +80,7 @@
                 </fieldset>
             </div>
         </div>
-    </div>
+
 
     <!-- Informações do pedido-->
     <div class="card">
@@ -163,7 +147,13 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">R$</div>
                         </div>
-                        <input [imask]="imaskConfig" class="form-control" id="total" formControlName="total" [value]="total()" />
+                        <input
+                            [imask]="imaskConfig"
+                            class="form-control"
+                            id="total"
+                            formControlName="total"
+                            [value]="total()"
+                        />
                     </div>
                     <app-form-field-error [form-control]="form['total']"></app-form-field-error>
                 </div>

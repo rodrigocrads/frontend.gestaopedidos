@@ -23,7 +23,7 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
 
   filteredProducts: Product[] = [];
   filteredCustomers: Customer[] = [];
-  selectedProduct: Product = {};
+  selectedCustomer: Customer = {};
 
   constructor(
     private primeNgConfig: PrimeNGConfig,
@@ -75,17 +75,16 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
     this.resourceForm = this.formBuilder.group({
       id: [null],
       observations: ['', [Validators.maxLength(255)]],
-      customer: this.formBuilder.group({
+      customer: this.formBuilder.control({
         id: [null],
-        cellphone: ['', [Validators.required]],
         name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]],
-        address: this.formBuilder.group({
-          address: ['', [Validators.required]], 
-          number: ['', [Validators.required]],
-          complement: [''],
-          neighborhood: ['', [Validators.required]],
-          city: ['', [Validators.required]],
-        }),
+      }),
+      deliveryAddress: this.formBuilder.group({
+        address: ['', [Validators.required]], 
+        number: ['', [Validators.required]],
+        complement: [''],
+        neighborhood: ['', [Validators.required]],
+        city: ['', [Validators.required]],
       }),
       deliveryDate: ['', [Validators.required]],
       total: ['', [Validators.required]],
@@ -114,21 +113,27 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
     this.resourceForm.get('customer')?.setValue({
       id: customer.id,
       name: customer.name,
-      address: customer.address,
-      cellphone: customer.cellphone,
     });
+
+    this.resourceForm.get('deliveryAddress')?.setValue(customer.address);
   }
 
-  public total(): number|undefined {
-    if (!this.isActiveTotalCalculate()) return 0;
+  public total(): string|undefined {
+    if (!this.isActiveTotalCalculate()) return '0';
 
-    return this.resourceForm
+    const total = this.resourceForm
       .value
       .items
       .reduce((acc: number, curr: any) => {
-        if (!curr?.product?.value) return acc;
+        if (!curr?.product?.value) {
+          return acc;
+        }
         return acc + curr.product?.value?.replace(",", ".") * curr.quantity;
       }, 0);
+
+      this.resourceForm.get('total')?.setValue(`${total}`.replace(".", ","));
+
+      return `${total}`.replace(".", ",");
   }
 
   public addNewItem() {
