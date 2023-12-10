@@ -42,10 +42,10 @@
                         </small>
                     </td>
                     <td>
-                        {{ customer.cellphone }}
+                        {{ customer.cellphone ?? 'Não informado' }}
                     </td>
                     <td>
-                        {{ customer.birthday ? customer.birthday : 'Não informado' }}
+                        {{ customer.birthday ?? 'Não informado' }}
                     </td>
                     <td>
                         {{ customer.status === 'ATIVO' ? 'ATIVO' : 'INATIVO' }}
