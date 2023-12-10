@@ -31,6 +31,8 @@
                             formControlName="customer"
                             field="name"
                             [(ngModel)]="selectedCustomer"
+                            emptyMessage="Nenhum cliente encontrado"
+                            [showEmptyMessage]=true
                         >
                         </p-autoComplete>
                         <app-form-field-error [form-control]="form['name']"></app-form-field-error>
@@ -107,7 +109,10 @@
                                     (completeMethod)="filterProduct($event)"
                                     formControlName="product"
                                     placeholder="Digite o nome do produto ..."
-                                    field="name">
+                                    field="name"
+                                    emptyMessage="Nenhum produto encontrado"
+                                    [showEmptyMessage]=true
+                                >
                                 </p-autoComplete>
                             </div>
 
