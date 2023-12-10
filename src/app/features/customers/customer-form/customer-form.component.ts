@@ -42,7 +42,7 @@ export class CustomerFormComponent extends BaseFormComponent<Customer> implement
         neighborhood: ['', [Validators.required]],
         city: ['', [Validators.required]],
       }),
-      cellphone: ['', [Validators.required]],
+      cellphone: [''],
       status: ['ATIVO', [Validators.required]],
       birthday: [null]
     });
