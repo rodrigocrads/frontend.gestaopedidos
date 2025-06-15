@@ -2,13 +2,14 @@ import { Component, Input } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-form-field-error',
-  template: `
+    selector: 'app-form-field-error',
+    template: `
     <div class="text-danger">
       {{errorMessage}}
     </div>
   `,
-  styleUrls: ['./form-field-error.component.scss']
+    styleUrls: ['./form-field-error.component.scss'],
+    standalone: false
 })
 export class FormFieldErrorComponent {
 

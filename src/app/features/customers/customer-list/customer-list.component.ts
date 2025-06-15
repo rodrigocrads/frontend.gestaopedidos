@@ -4,9 +4,10 @@ import { Customer } from '../shared/customer.model';
 import { CustomerService } from '../shared/customer.service';
 
 @Component({
-  selector: 'app-customer-list',
-  templateUrl: './customer-list.component.html',
-  styleUrls: ['./customer-list.component.scss']
+    selector: 'app-customer-list',
+    templateUrl: './customer-list.component.html',
+    styleUrls: ['./customer-list.component.scss'],
+    standalone: false
 })
 export class CustomerListComponent extends BaseListComponent<Customer>{
   constructor(

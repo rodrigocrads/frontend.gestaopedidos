@@ -7,9 +7,10 @@ import { Category } from '../shared/category.model';
 import { Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-product-form',
-  templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.scss']
+    selector: 'app-product-form',
+    templateUrl: './product-form.component.html',
+    styleUrls: ['./product-form.component.scss'],
+    standalone: false
 })
 export class ProductFormComponent extends BaseFormComponent<Product> implements OnInit {
   categories: Category[] = [];

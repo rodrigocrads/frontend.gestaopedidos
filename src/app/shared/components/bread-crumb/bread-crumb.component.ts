@@ -6,8 +6,9 @@ interface BreadCrumbItem {
 }
 
 @Component({
-  selector: 'app-bread-crumb',
-  templateUrl: './bread-crumb.component.html',
+    selector: 'app-bread-crumb',
+    templateUrl: './bread-crumb.component.html',
+    standalone: false
 })
 export class BreadCrumbComponent {
   @Input() items: BreadCrumbItem[] = [];

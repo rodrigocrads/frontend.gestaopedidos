@@ -5,9 +5,10 @@ import { BaseListComponent } from 'src/app/shared/components/base-list/base-list
 import { OrderStatus } from '../shared/order-status.enum';
 
 @Component({
-  selector: 'app-order-list',
-  templateUrl: './order-list.component.html',
-  styleUrls: ['./order-list.component.scss']
+    selector: 'app-order-list',
+    templateUrl: './order-list.component.html',
+    styleUrls: ['./order-list.component.scss'],
+    standalone: false
 })
 export class OrderListComponent extends BaseListComponent<Order> {
 

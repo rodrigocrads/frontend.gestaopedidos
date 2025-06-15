@@ -5,9 +5,10 @@ import { CustomerService } from '../shared/customer.service';
 import { Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-customer-form',
-  templateUrl: './customer-form.component.html',
-  styleUrls: ['./customer-form.component.scss']
+    selector: 'app-customer-form',
+    templateUrl: './customer-form.component.html',
+    styleUrls: ['./customer-form.component.scss'],
+    standalone: false
 })
 export class CustomerFormComponent extends BaseFormComponent<Customer> implements OnInit {
 

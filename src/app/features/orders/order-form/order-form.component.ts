@@ -10,9 +10,10 @@ import { Customer } from '../../customers/shared/customer.model';
 import { CustomerService } from '../../customers/shared/customer.service';
 
 @Component({
-  selector: 'app-order-form',
-  templateUrl: './order-form.component.html',
-  styleUrls: ['./order-form.component.scss']
+    selector: 'app-order-form',
+    templateUrl: './order-form.component.html',
+    styleUrls: ['./order-form.component.scss'],
+    standalone: false
 })
 export class OrderFormComponent extends BaseFormComponent<Order> implements OnInit {
   @ViewChild('activeCalculateTotalValue', { static: true, read: ElementRef })
