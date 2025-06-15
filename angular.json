@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "frontend.gestaopedidos:build:production"
+              "buildTarget": "frontend.gestaopedidos:build:production"
             },
             "development": {
-              "browserTarget": "frontend.gestaopedidos:build:development"
+              "buildTarget": "frontend.gestaopedidos:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "frontend.gestaopedidos:build"
+            "buildTarget": "frontend.gestaopedidos:build"
           }
         },
         "test": {
