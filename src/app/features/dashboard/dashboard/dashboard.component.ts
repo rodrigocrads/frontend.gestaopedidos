@@ -4,7 +4,7 @@ import { OrderService } from '../../orders/shared/order.service';
 
 import { Chart, registerables } from 'chart.js';
 import { OrderStatus } from '../../orders/shared/order-status.enum';
-import * as moment from 'moment';
+import moment from 'moment';
 Chart.register(...registerables);
 
 @Component({

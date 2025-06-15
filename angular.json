@@ -31,7 +31,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/primeng/resources/themes/bootstrap4-dark-blue/theme.css",
+              "node_modules/primeng/resources/primeng.css"
             ],
             "scripts": [],
             "browser": "src/main.ts"
@@ -93,7 +95,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/primeng/resources/themes/bootstrap4-dark-blue/theme.css"
             ],
             "scripts": []
           }

@@ -1,5 +1,4 @@
 import { Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
-import { PrimeNGConfig } from 'primeng/api';
 import { BaseFormComponent } from 'src/app/shared/components/base-form/base-form.component';
 import { Order } from '../shared/order.model';
 import { OrderService } from '../shared/order.service';
@@ -26,7 +25,6 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
   selectedCustomer: Customer = {};
 
   constructor(
-    private primeNgConfig: PrimeNGConfig,
     protected orderService: OrderService,
     protected productService: ProductService,
     protected customerService: CustomerService,
@@ -38,19 +36,19 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
   override ngOnInit(): void {
     super.ngOnInit();
 
-    this.primeNgConfig.setTranslation({
-      firstDayOfWeek: 0,
-      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-      dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-      monthNames: [
-        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
-        'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-      ],
-      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-      today: 'Hoje',
-      clear: 'Limpar',
-    });
+    // this.primeNgConfig.setTranslation({
+    //   firstDayOfWeek: 0,
+    //   dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+    //   dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+    //   dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+    //   monthNames: [
+    //     'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
+    //     'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    //   ],
+    //   monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+    //   today: 'Hoje',
+    //   clear: 'Limpar',
+    // });
   }
 
   togglActiveCalculateTotalValue() {
@@ -109,7 +107,7 @@ export class OrderFormComponent extends BaseFormComponent<Order> implements OnIn
     return orderItem.product?.value?.replace(",", ".") * orderItem.quantity;
   }
 
-  public onSelectedCustomer(customer: Customer) {
+  public onSelectedCustomer(customer: any) {
     this.resourceForm.get('customer')?.setValue({
       id: customer.id,
       name: customer.name,
